@@ -1,0 +1,27 @@
+# This uses actions from others
+
+name: Test Github Actions Workflow
+on:
+  push:
+    branches:
+      - "develop"
+jobs:
+  job-name-use-actions-from-other-github-accounts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello to your name
+        id: step-hello
+        # actions is a username and hello-world-javascript-action is the repository
+        uses: actions/hello-world-javascript-action@v1.1
+        with:
+          who-to-greet: "Gangadhar Reddy Gangireddy"
+      - name: Print the curent time 
+        run: echo "${{ steps.step-hello.outputs.time }}"
+      - name: Print Github Default ENVIRONMENT VARIABLES
+        run: |
+            echo "$GITHUB_SHA"
+            echo "$GITHUB_REPOSITORY"
+            echo "$GITHUB_WORKSPACE"
+      - name: Print Github OBJECT
+        run: |
+            echo "${{Github.token}}"
